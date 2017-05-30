@@ -51,6 +51,8 @@ class GitlabProjectsParser implements Iterator{
 		curl_setopt($s,CURLOPT_URL,$url);
 		curl_setopt($s,CURLOPT_RETURNTRANSFER,true);
 		$jsonReply=curl_exec($s);
+		if (curl_error($s))
+			throw new Exception(curl_error($s));
 		curl_close($s);
 		if ($jsonReply==null)
 			throw new Exception("Unable to download $url");
