@@ -22,10 +22,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-include_once('GitlabProjectsParser.php');
-include_once('DOAPOntology.php');
+include_once('../php/GitlabProjectsParser.php');
+include_once('../php/DOAPOntology.php');
 
-$o=new DOAPOntology("http://git.muttelab.org/ontology/");
+$o=new DOAPOntology("http://git.mittelab.org/ontology/");
+$o->addLicense('http://creativecommons.org/licenses/by/4.0/');
 $p=GitlabProjectsParser::getFromRESTEndpoint("https://git.mittelab.org/api/v4/projects/","https://www.mittelab.org/projects/");
 foreach ($p as $entry){
 	$o->add($entry);
