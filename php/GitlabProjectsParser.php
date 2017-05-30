@@ -51,6 +51,7 @@ class GitlabProjectsParser implements Iterator{
 		curl_setopt($s,CURLOPT_URL,$url);
 		curl_setopt($s,CURLOPT_RETURNTRANSFER,true);
 		curl_setopt($s,CURLOPT_SSL_VERIFYPEER,false);
+		curl_setopt($s,CURLOPT_SSL_VERIFYHOST,0);
 		$jsonReply=curl_exec($s);
 		if (curl_error($s))
 			throw new Exception(curl_error($s));
