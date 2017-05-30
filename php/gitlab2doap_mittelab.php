@@ -31,5 +31,11 @@ foreach ($p as $entry){
 	$o->add($entry);
 }
 
+header('Content-type: application/rdf+xml; charset=UTF-8');
+/*
+ * Impostazioni locali in italiano, utilizzato per la stampa di data e ora
+ * (il server deve avere il locale italiano installato
+ */
+setlocale(LC_TIME, 'it_IT');
 echo $o->getXML()->saveXML();
 ?>

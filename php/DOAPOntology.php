@@ -53,14 +53,13 @@ class DOAPOntology extends RDFXMLOntology{
 		$projectEl=$this->addElement('doap:Project');
 		$projectEl->setAttribute('rdf:about',$project->url);
 		
-		$nameEl=$this->addProperty($projectEl,'doap:name');
-		$nameTxtNode=$this->getXML()->createTextNode($project->name);
-		$nameEl->appendChild($nameTxtNode);
-		
+		$this->addTextProperty($projectEl,'doap:name', $project->name);
+		$this->addTextProperty($projectEl,'doap:shortdesc', $project->shortdesc);
+				
 		$this->addResourceProperty($projectEl, 'doap:homepage', $project->landing);	
 		
-		$gitRepoEl=$this->addResourceProperty(
-				$this->addResourceProperty($projectEl, 'doap:Repository'), 'doap:GitRepository');
+		$gitRepoEl=$this->addProperty(
+				$this->addProperty($projectEl, 'doap:Repository'), 'doap:GitRepository');
 		$this->addResourceProperty($gitRepoEl, 'doap:location', $project->gitrepo);
 		$this->addResourceProperty($gitRepoEl, 'doap:browse', $project->gitbrowse);
 	}
@@ -105,5 +104,21 @@ class DOAPOntology extends RDFXMLOntology{
 		$propertyEl->setAttribute('rdf:resource', $resourceUrl);
 		return $propertyEl;
 	}	
+	
+	/**
+	 *
+	 * @param DOMElement $element
+	 * @param string $propertyName
+	 * @param string $text
+	 *
+	 * @return the DOMElement representing the property in the XML document
+	 */
+	private function addTextProperty($element, $propertyName, $text){
+		$propertyEl=$this->addProperty($element,$propertyName);
+		$textNode=$this->getXML()->createTextNode($text);
+		$propertyEl->appendChild($textNode);
+		return $propertyEl;
+	}
+	
 }
 ?>

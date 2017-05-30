@@ -27,6 +27,7 @@ class DOAPProject{
 	
 	public $url; //URL which identifies the project in the Universe
 	public $name; //project name
+	public $shortdesc; //project name
 	public $landing; //landing page of the project
 	public $gitbrowse; //web page of the git repository
 	public $gitrepo; //clone url of the git repository	

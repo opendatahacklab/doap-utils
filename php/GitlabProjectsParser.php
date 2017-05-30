@@ -59,7 +59,8 @@ class GitlabProjectsParser implements Iterator{
 		$gitlab=$this->srcIterator->current();
 		$doap = new DOAPProject();
 		$doap->url=$this->namespace.$gitlab->id;
-		$doap->name=$gitlab->name_with_namespace;
+		$doap->name=$gitlab->name;
+		$doap->shortdesc=$gitlab->name_with_namespace;
 		$doap->landing=$gitlab->web_url;
 		$doap->gitbrowse=$gitlab->web_url;
 		$doap->gitrepo=$gitlab->http_url_to_repo;
