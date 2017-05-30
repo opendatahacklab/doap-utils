@@ -23,13 +23,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 include_once('GitlabProjectsParser.php');
+include_once('DOAPOntology.php');
+
+$o=new DOAPOntology("http://git.muttelab.org/ontology/");
 $p=GitlabProjectsParser::getFromRESTEndpoint("https://git.mittelab.org/api/v4/projects/","https://www.mittelab.org/projects/");
 foreach ($p as $entry){
-	echo "----------\n";
-	echo "url: $entry->url\n";
-	echo "name: $entry->name\n";
-	echo "landing: $entry->landing\n";
-	echo "git browse: $entry->gitbrowse\n";
-	echo "git repo: $entry->gitrepo\n";
+	$o->add($entry);
 }
+
+echo $o->getXML()->saveXML();
 ?>
